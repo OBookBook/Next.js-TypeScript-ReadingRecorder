@@ -1,5 +1,5 @@
 export interface Book {
-  id: number;
+  id: string;
   image: string;
   title: string;
   price: number;
@@ -14,7 +14,7 @@ export interface BookDetailsProps {
 }
 
 export interface GoogleBookVolume {
-  id: number;
+  id: string;
   volumeInfo: {
     title: string;
     authors?: string[];
