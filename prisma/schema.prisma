@@ -11,7 +11,7 @@ datasource db {
 }
 
 model reviews {
-  id        Int      @id @default(autoincrement())
+  id        String   @id
   title     String
   author    String
   price     Int
