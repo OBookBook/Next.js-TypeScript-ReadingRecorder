@@ -3,7 +3,15 @@ import { Book } from "@/types/book";
 import { getBooksByKeyword } from "@/app/lib/dbQueries";
 import LinkedBookDetails from "@/components/LinkedBookDetails";
 
-type Params = Promise<{ keyword: string }>;
+export async function generateStaticParams() {
+  return [
+    { keyword: ["programming"] },
+    { keyword: ["javascript"] },
+    { keyword: ["react"] },
+  ];
+}
+
+type Params = Promise<{ keyword: string[] }>;
 
 export default async function BookResult({
   params,
@@ -11,7 +19,7 @@ export default async function BookResult({
   params: Params;
 }): Promise<JSX.Element> {
   const { keyword } = await params;
-  const books = await getBooksByKeyword(keyword);
+  const books = await getBooksByKeyword(keyword[0]);
 
   return (
     <>
