@@ -8,10 +8,11 @@ export async function generateStaticParams() {
     { keyword: ["programming"] },
     { keyword: ["javascript"] },
     { keyword: ["react"] },
+    { keyword: [] },
   ];
 }
 
-type Params = Promise<{ keyword: string[] }>;
+type Params = Promise<{ keyword?: string[] }>;
 
 export default async function BookResult({
   params,
@@ -19,7 +20,9 @@ export default async function BookResult({
   params: Params;
 }): Promise<JSX.Element> {
   const { keyword } = await params;
-  const books = await getBooksByKeyword(keyword[0]);
+  // キーワードが存在しない場合は空文字列を使用
+  const searchKeyword = keyword?.[0] || "";
+  const books = await getBooksByKeyword(searchKeyword);
 
   return (
     <>
